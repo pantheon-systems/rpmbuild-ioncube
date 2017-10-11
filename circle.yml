@@ -1,0 +1,20 @@
+---
+dependencies:
+  pre:
+    - make deps
+    - make deps-circle
+
+test:
+  override:
+    - make all test
+
+deployment:
+  prod:
+    branch: master
+    commands:
+      - bash scripts/push_packagecloud.sh internal
+  development:
+    branch: /^(?!master$).*$/  # not the master branch
+    commands:
+      - rsync -ravz pkgs/ $CIRCLE_ARTIFACTS
+      - bash scripts/push_packagecloud.sh internal-staging
