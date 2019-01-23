@@ -6,6 +6,8 @@ bin="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 
 IONCUBE_VERSION=$(curl http://www.ioncube.com/feeds/product_info/versions.php?item=loader-versions 2>/dev/null | sed -e 's/.*linux_x86_64[^"]*"[^"]*"//' -e 's/".*//')
 
+echo "IonCube version: $IONCUBE_VERSION"
+
 # set a default build -> 0 for when it doesn't exist
 CIRCLE_BUILD_NUM=${CIRCLE_BUILD_NUM:-0}
 
